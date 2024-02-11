@@ -1,5 +1,4 @@
 create sequence landing.lid_historical_1_quotes start 1;
-drop table landing.historical_1d_quotes;
 create table landing.historical_1d_quotes
 (
     landing_id bigint primary key default nextval('landing.lid_historical_1_quotes'),
@@ -23,12 +22,4 @@ $$;
 
 create trigger trg_metadata_historical_1d_quotes_bi
     before insert on landing.historical_1d_quotes
-    for each row execute function landing.set_landing_table_metadata_columns();
-
-select meta.start_pipeline_run('1d_historical_data');
-insert into landing.historical_1d_quotes (raw_data) values (to_jsonb('[{"test":1}]'::text));
-insert into landing.historical_1d_quotes(raw_data) values (to_json(cast('[]' as text)));
-
-create trigger trg_insert_test
-    before insert on landing.test
     for each row execute function landing.set_landing_table_metadata_columns();
