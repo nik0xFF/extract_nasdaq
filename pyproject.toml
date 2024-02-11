@@ -1,0 +1,77 @@
+[tool.poetry]
+name = "extract-nasdaq"
+version = "0.1.0"
+description = ""
+authors = ["dominik.klug <me@nikklug.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+sqlalchemy = "^2.0.25"
+psycopg = {extras = ["binary", "pool"], version = "^3.1.18"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.3.0"                                   # The uncompromising code formatter.
+coverage = {extras = ["toml"], version = "^6.4.1"}  # Code coverage measurement for Python
+unittest-xml-reporting = "^3.2.0"                   # unittest-based test runner with Ant/JUnit like XML reporting.
+pre-commit = "^2.19.0"                              # A framework for managing and maintaining multi-language pre-commit hooks.
+pre-commit-hooks = "^4.2.0"                         # Some out-of-the-box hooks for pre-commit.
+pydocstyle = "^6.1.1"                               # Python docstring style checker
+pylint = "^2.14.1"                                  # python code static checker
+pylint-sonarjson = "^1.0.6"                         # Plugin for pylint to export severities of issues to sonar
+isort = "^5.12.0"                                   # Tool for reordering python imports
+
+
+[tool.poetry.scripts]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.main]
+load-plugins = "pylint_sonarjson"
+fail-on = "F,E,W"
+fail-under = 0.0
+
+[tool.pylint.basic]
+good-names = ["i", "j", "k", "n", "s", "d", "ex", "Run", "_", "pk", "x", "y", "df"]
+
+[tool.pylint.format]
+max-line-length = 140
+max-args = 8
+
+[tool.pylint.messages_control]
+disable = [
+    # pydocstyle takes care of this...
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "missing-class-docstring",
+
+    # don't hinder me creating small classes!
+    "too-few-public-methods",
+
+    # reorder-python-imports should know what it's doing
+    "wrong-import-order",
+
+    # can't do much about duplicate imports in two files, I'm afraid...
+    "duplicate-code",
+]
+
+[tool.pylint.miscellaneous]
+notes = []  # don't warn about `TODO` and `FIXME` comments
+
+[tool.pylint.reports]
+output-format = "sonarjson:./sonar_report.json,text"
+
+[tool.pydocstyle]
+match-dir = "[^\\.][^test].*"
+convention = "google"
+
+[tool.coverage.run]
+command_line = "-m xmlrunner discover --output-file junittest.xml"
+
+
