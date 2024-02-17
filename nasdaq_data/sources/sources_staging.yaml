@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: staging
+    database: nasdaq_data
+    schema: staging
+    tables:
+      - name: historical_1d_quotes

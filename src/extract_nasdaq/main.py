@@ -47,10 +47,10 @@ def main():
             if WRITE_RESULT_TO_DISK:
                 with open(os.path.join(path_to_store_res, f"{t['Symbol']}_1D.json"), 'wb') as res_file:
                     res_file.write(res.content)
-
+            json_s = res.content.decode()
             with sync_engine.connect() as conn:
                 conn.execute(text("insert into landing.historical_1d_quotes(raw_data) "
-                                  "values (to_json(cast(:raw_data as text)))"),
+                                  "values (:raw_data)"),
                              {"raw_data": res.content.decode()})
                 conn.commit()
 

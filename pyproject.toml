@@ -10,6 +10,8 @@ python = "^3.11"
 requests = "^2.31.0"
 sqlalchemy = "^2.0.25"
 psycopg = {extras = ["binary", "pool"], version = "^3.1.18"}
+dbt-core = "^1.7.8"
+dbt-postgres = "^1.7.8"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.3.0"                                   # The uncompromising code formatter.
