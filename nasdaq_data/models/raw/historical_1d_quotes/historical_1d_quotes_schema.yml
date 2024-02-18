@@ -47,3 +47,49 @@ models:
           jsonpath:
         tests:
           - not_null
+
+  - name: historical_1d_quotes_cleansed
+    description: "Contains time series  with OLHC and volume of stocks"
+    columns:
+      - name: symbol
+        description: "The symbol of the title"
+        meta:
+          jsonpath:
+        tests:
+          - not_null
+      - name: date
+        description: "the timestamp of the title with TZ UTC"
+        meta:
+          jsonpath:
+        tests:
+          - not_null
+      - name: open
+        description: "the opening price of the title"
+        meta:
+          jsonpath:
+        tests:
+          - not_null
+      - name: high
+        description: "the daily price maximum"
+        meta:
+          jsonpath:
+        tests:
+          - not_null
+      - name: low
+        description: "the daily price minimum"
+        meta:
+          jsonpath:
+        tests:
+          - not_null
+      - name: close
+        description: "The closing price"
+        meta:
+          jsonpath:
+        tests:
+          - not_null
+      - name: volume
+        description: "The traded volume"
+        meta:
+          jsonpath:
+        tests:
+          - not_null

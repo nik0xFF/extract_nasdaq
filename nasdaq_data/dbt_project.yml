@@ -30,3 +30,5 @@ models:
   nasdaq_data:
     raw:
       +materialized: incremental
+    business:
+      +materialized: incremental

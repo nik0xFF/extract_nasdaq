@@ -23,9 +23,10 @@
     language plpgsql;
 {%- endcall -%}
 
+
 with flattened as (
-    select raw_data::json -> 'data' -> 'symbol' as symbol,
-           json_populate_record(null::raw.hist_1d_quotes_t, json_array_elements(raw_data::json -> 'data' -> 'tradesTable' -> 'rows')) as row
+    select raw_data -> 'data' ->> 'symbol' as symbol,
+           jsonb_populate_recordset(null::raw.hist_1d_quotes_t, raw_data -> 'data' -> 'tradesTable' -> 'rows') as row
     from staging.historical_1d_quotes
 )
 select symbol,
