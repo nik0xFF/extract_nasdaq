@@ -12,6 +12,8 @@ sqlalchemy = "^2.0.25"
 psycopg = {extras = ["binary", "pool"], version = "^3.1.18"}
 dbt-core = "^1.7.8"
 dbt-postgres = "^1.7.8"
+alpha-vantage = "^2.3.1"
+pandas = "^2.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.3.0"                                   # The uncompromising code formatter.
